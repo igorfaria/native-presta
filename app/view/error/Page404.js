@@ -1,5 +1,5 @@
 import { Product } from "../../model/@exports";
-import { VStack,HStack, Text, Button } from "@react-native-material/core";
+import { VStack, Text } from "@react-native-material/core";
 import { _l } from '../../core/@exports';
 
 export class Page404 extends Product {
