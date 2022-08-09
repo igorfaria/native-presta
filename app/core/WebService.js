@@ -56,7 +56,8 @@ export class WebService extends Component {
 
     async requestResource(handlerFunction){
         const headers = {
-            'Content-Type': 'text/plain'
+            'Content-Type': 'text/plain',
+            'SameSite': 'Strict',
         };
 
         const link = this.getRequestLink();
