@@ -1,18 +1,12 @@
-import { Product } from "../../model/@exports";
-import { VStack, Text } from "@react-native-material/core";
+import { BasePageError } from "./BasePageError";
 import { _l } from '../../core/@exports';
 
-export class Page404 extends Product {
+export class Page404 extends BasePageError {
     render(){
         return (
-            <VStack spacing={ 4 } center>
-                <Text style={ { fontSize: "2em", fontWeight: 500 } }>
-                    { this.props.title ? this.props.title : "404" }
-                </Text>
-                <Text>
-                    { this.props.content ? this.props.content : _l("Page not found") }
-                 </Text>
-            </VStack>
+            <BasePageError 
+                title={ this.props.title ? this.props.title : "404" } 
+                content={ this.props.content ? this.props.content : _l("Page not found") } />
         );
     }
 
