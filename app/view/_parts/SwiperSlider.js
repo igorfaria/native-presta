@@ -24,6 +24,7 @@ export class SwiperSlider extends Component {
     render(){
         return (
             <View style={styles.wrapper} {...this.state.optionsWrapper} >
+              <View style={ {flex: 1} }>
             <Swiper
               {...this.state.options} 
             >
@@ -43,6 +44,7 @@ export class SwiperSlider extends Component {
                 );
               })}
             </Swiper>
+            </View>
             </View>
         );
     }
