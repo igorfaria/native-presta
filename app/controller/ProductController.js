@@ -10,11 +10,7 @@ export class ProductController extends Controller {
     }
 
     render(){
-
         if(!this.props.route.params) return <Page404 content={ "Product not found" }  />
-
-        //const id = !(this.props.route.params.id) ? null : this.props.route.params.id;
-        console.log(this.props, this.props.route);
         const id = 1;
         return (
             <ProductPage 

@@ -2,7 +2,6 @@ import { Component } from "react";
 
 export class Language extends Component {
     getTranslation(string, domain){
-        console.info('Translate', string, domain); 
         return string;
     }
 }

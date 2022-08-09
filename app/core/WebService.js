@@ -21,7 +21,7 @@ export class WebService extends Component {
             response: 'initial',
             status: false,
             handler: (response) => {},
-            cache: false,
+            cache: true,
         };
 
         if(props && 'query' in props) {
@@ -42,12 +42,8 @@ export class WebService extends Component {
         return request;
     }
 
-    async requestResource(handlerFunction){
-        const headers = {
-            'Content-Type': 'text/plain'
-        };
-
-        const link = [
+    getRequestLink(){
+        return [
             this.state.protocol,
             '://',
             this.state.domain,
@@ -56,6 +52,14 @@ export class WebService extends Component {
             '?',
             this.state.query.join('&')
         ].join('');
+    }
+
+    async requestResource(handlerFunction){
+        const headers = {
+            'Content-Type': 'text/plain'
+        };
+
+        const link = this.getRequestLink();
 
         const setResponse = (link, response, status)=> {
 
@@ -70,10 +74,6 @@ export class WebService extends Component {
                 this.saveCache();
             }
             
-            console.warn('WS Response');
-            console.log(link);
-            console.log(response);
-            
             this.handlerFunction(this.state.handler);
         }
 
@@ -82,7 +82,7 @@ export class WebService extends Component {
             const userIsConnected = true;
             const cache = this.getCache(link, userIsConnected);
             // If there is a valid cache response 
-            if('status' in cache && cache.status == true && 'link' in cache && 'response' in cache){
+            if(cache && 'status' in cache && cache.status == true && 'link' in cache && 'response' in cache){
                 setResponse(link, cache.response, true)
                 return cache;
             }
@@ -110,7 +110,8 @@ export class WebService extends Component {
     }
 
     saveCache(){
-        // link, response, status from the state 
+        // resource, response from the state 
+        console.log('Status', this.state.status, 'from', this.state.resource, this.getRequestLink(), 'with response', this.state.response);
     }
 
     getCache(link, userIsConnected){

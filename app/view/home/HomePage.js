@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, Text } from "react-native";
 import { _l } from '../../core/@exports';
 import { Products } from "../../model/@exports";
 import { SearchBar } from "../_parts/SearchBar";
@@ -12,11 +12,64 @@ export class HomePage extends Component {
         super(props);
     }
 
+    sliderHomeOptions(){
+        return {
+            optionsWrapper: {
+                style: {
+                    height: '50vh',
+                    backgroundColor: 'lime',
+                }
+            },
+            options: {
+                horizontal: false,
+                showsButtons: false,
+            },
+            optionsSlide: {
+                style: {
+                    backgroundColor: 'red',
+                }
+            }
+        }
+    }
+
+    slidesHome(){
+        return [
+            {
+                style: {
+                    backgroundColor: 'blue',
+                    color: 'lime',
+                },
+                content: (
+                    <Text>Slide 1</Text>
+                )
+            },
+            {
+                style: {
+                    backgroundColor: 'yellow'
+                },
+                content: (
+                    <Text>Slide 2</Text>
+                )
+            },
+            {
+              style: {
+                    backgroundColor: 'red'
+                },
+                content: (
+                    <Text>Slide 3</Text>
+                )
+            }
+        ];
+    }
+
     render(){
         return (
         <ScrollView style={ styles.container }>
             <SearchBar search={ _l("Search value") } />
-            <SwiperSlider />
+            <SwiperSlider 
+                { ...this.sliderHomeOptions() }
+                slides={ this.slidesHome() }
+            />
             <ProductGrid><Products {...this.props} query={{limit: 3}} /></ProductGrid>
         </ScrollView>
         );
