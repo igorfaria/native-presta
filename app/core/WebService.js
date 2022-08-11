@@ -1,6 +1,6 @@
-import { Component } from 'react';
-import axios from 'react-native-axios'; 
-import { AppConfig } from "./@exports";
+import { Component } from "react";
+import axios from "react-native-axios"; 
+import AppConfig from "./AppConfig";
 
 export class WebService extends Component {
      
@@ -32,9 +32,14 @@ export class WebService extends Component {
 
     }
 
+    componentDidMount(){
+        if(this.props.check) return this.requestResource();
+    }
+
     request(method){
         const request = this.requestResource(
             (response) => {
+                    if(this.props.check) return response;
                     if(response) return this.state.data = response;
                     return false;
             }
@@ -92,9 +97,11 @@ export class WebService extends Component {
         const response = await axios.get(
             link
             ).then(response => {
+                if(this.props.check) return response;
                 setResponse(link, response, true);
             })
             .catch(error => {
+                if(this.props.check) return false;
                 setResponse(link, error, false);
             }
         )

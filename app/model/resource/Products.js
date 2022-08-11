@@ -4,7 +4,15 @@ export class Products extends Product {
 
     constructor(props){
         super(props);
+        
+    }
+
+    componentDidMount() {
         this.getProducts(props);
+/*        const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`);
+        const json = await response.json();
+        this.setState({ data: json });
+        */
     }
 
     getProducts(props){

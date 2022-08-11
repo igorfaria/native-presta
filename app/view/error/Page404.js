@@ -1,5 +1,5 @@
 import { BasePageError } from "./BasePageError";
-import { _l } from '../../core/@exports';
+import _l from "../../core/Language";
 
 export class Page404 extends BasePageError {
     render(){

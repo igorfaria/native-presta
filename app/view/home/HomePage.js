@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { StyleSheet, ScrollView, Text } from "react-native";
-import { _l } from '../../core/@exports';
-import { Products } from "../../model/@exports";
+import _l from '../../core/Language';
+import { Products } from "../../model/resource/Products";
 import { SearchBar } from "../_parts/SearchBar";
 import { SwiperSlider } from "../_parts/SwiperSlider";
 import { ProductGrid } from "../product/ProductGrid";
@@ -70,23 +70,22 @@ export class HomePage extends Component {
                 { ...this.sliderHomeOptions() }
                 slides={ this.slidesHome() }
             />
-            <ProductGrid><Products {...this.props} query={{limit: 3}} /></ProductGrid>
         </ScrollView>
         );
     }
 }
-
+// <ProductGrid><Products {...this.props} query={{limit: 3}} /></ProductGrid>
 
 const styles = StyleSheet.create({
     title: {
-        marginTop: '2em',
-        marginBottom: '2em',
-        fontSize: '1.5em',
+        marginTop: 4,
+        marginBottom: 4,
+        fontSize: 8,
         fontWeight: 600,
     },
     container: {
         flex: 1,
-        padding: "1rem",
+        padding: 4,
         overflow: 'hidden',
     }
 });

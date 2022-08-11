@@ -4,7 +4,6 @@
 */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { Text } from "@react-native-material/core";
 import Swiper from "react-native-swiper/src";
 
 export class SwiperSlider extends Component {

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { Stack, HStack, VStack, IconButton } from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { _l } from "../../core/@exports";
+import _l from "../../core/Language";
 
 import StyleMediaQuery from "../../component/StyleMediaQuery";
  
@@ -47,19 +47,18 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: "center",
         alignItems: "center",
-        marginVertical: '1rem',
+        marginVertical: 1,
     },
     searchInput: {
         flex: 1,
         backgroundColor: 'white',
-        fontSize: '1rem',
-        paddingVertical: '1rem',
-        paddingHorizontal: '0.5rem',
+        fontSize: 4,
+        padding: 4,
     },
     inputContainer: {
         backgroundColor: 'white',
         borderRadius: 100,
-        paddingStart: '2rem',
+        paddingStart: 8,
         width: '94vw',
         ...StyleMediaQuery({
             1024: {
@@ -72,6 +71,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5'
     },
     iconSearch: {
-        fontSize: '1.5rem',
+        fontSize: 4,
     }
 });

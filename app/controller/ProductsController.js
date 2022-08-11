@@ -17,7 +17,7 @@ export class ProductsController extends Controller {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: "1rem",
+        paddingHorizontal: 1,
         overflow: 'hidden',
     }
 });

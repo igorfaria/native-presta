@@ -1,8 +1,6 @@
-import { 
-    AppConfig, 
-    Model 
-} from '../../core/@exports';
-import { ProductItem } from '../../view/product/ProductItem';
+import AppConfig from "../../core/AppConfig";
+import { Model } from "../../core/Model";
+import { ProductItem } from "../../view/product/ProductItem";
 
 export class Product extends Model {
 

@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { VStack,HStack, Text, Button } from "@react-native-material/core";
-import { _l } from '../../core/@exports';
-
+import _l from '../../core/Language';
 
 export class ProductItem extends Component {
 
@@ -51,37 +50,33 @@ export class ProductItem extends Component {
 
 const styles = StyleSheet.create({
     card: {
-      margin: '0.5em',
-      marginBottom: '1em',
-      marginTop: '1em',
+      margin: 7,
       maxWidth: 320,
       flexGrow: 1,
-      paddingTop: '1em',
+      paddingTop: 4,
       backgroundColor: '#FFFFFF',
       borderColor: '#D9D9D9',
-      borderWidth: '1px',
+      borderWidth: 1,
       borderStyle: 'solid',
     },
     actions: {
       justifyContent: 'space-between',
-      margin: '0.5em',
-      marginBottom: '0.8em',
+      margin: 4,
     },
     price: {
-      fontSize: '1.5em',
+      fontSize: 8,
       fontWeight: 500,
       color: '#00a124',
       alignSelf:'center',
     },
     title: {
-      margin: '0.5em',
-      marginTop: '-0.25em',
-      fontSize: '1.5em',
+      margin: 4,
+      fontSize: 8,
       fontWeight: 500,
     },
     cover: {
       flexDirection: 'column',
-      minHeight: '20em',
+      minHeight: 250,
     },
     button: {
       color: 'white',

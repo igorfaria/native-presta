@@ -1,36 +1,38 @@
-import { useState } from "react";
-import { AppConfig, routes } from "./app/core/@exports";
-import { View, StyleSheet, Text } from "react-native";
+import { useState, useEffect } from "react";
+import AppConfig from "./app/core/AppConfig";
+import routes from "./app/core/Routes";
+import { AppRegistry, View, StyleSheet, Text } from "react-native";
 import { ActivityIndicator } from "@react-native-material/core"
 import { useNetInfo } from '@react-native-community/netinfo';
 import { BottomNav } from "./app/view/_parts/BottomNav";
 import { InjectWebCss } from "./app/component/InjectWebCss"
 import { NotConnected } from "./app/view/error/NotConnected"; 
-
-const APP_STATS = {usageTime: 0};
-
+import { WebService } from "./app/core/WebService";
 
 export default function App(){
+
+ const [isAPIReachable, setisAPIReachable] = useState(false);
   
   const netInfo = useNetInfo();
   const userIsConnected = netInfo.isConnected ? true : false;
-
-  if(!userIsConnected){
-    let titleConnection = AppConfig.name;
-    const contentConnection =  <ActivityIndicator style={ { margin: '2rem' } } size="large" />;
-    APP_STATS.usageTime++;
-    if(APP_STATS.usageTime > 2){
-      titleConnection = <Text>Are you sure that you are connected?</Text>;
-    }
   
-    return <NotConnected title={titleConnection} content={contentConnection} />
+  if(isAPIReachable == false){
+    (new WebService({check: true})).requestResource().then(response => {
+      setisAPIReachable( response.status && response.status == 200 );
+    });
   }
-  
-  InjectWebCss();
+  let titleConnection = AppConfig.name;
+  const contentConnection =  <ActivityIndicator style={ { margin: 4 } } size="large" />;
+  if(!isAPIReachable || !userIsConnected){
+      titleConnection = <Text>Are you sure that you are connected?</Text>;
+      return <NotConnected title={titleConnection} content={contentConnection} />
+  }
+
+  //InjectWebCss();
   return (
   <View style={ styles.main  }>
-       <BottomNav routes={ routes }/>
-    </View>
+    <BottomNav routes={ routes }/>
+  </View>
   );
 } 
 
@@ -43,3 +45,5 @@ const styles = StyleSheet.create({
   },
   
 });
+
+AppRegistry.registerComponent('NativePresta', () => App);

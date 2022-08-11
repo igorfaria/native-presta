@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { _l } from "../../core/@exports";
+import _l from "../../core/Language";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";

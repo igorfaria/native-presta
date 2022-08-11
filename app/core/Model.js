@@ -1,4 +1,4 @@
-import { AppConfig } from "./@exports";
+import AppConfig from "./AppConfig";
 import { WebService } from "./WebService";
 
 export class Model extends WebService {
