@@ -28,7 +28,7 @@ export class BottomNav extends Component {
                                     <Icon name={route.icon} color={color} size={size} />
                                 )
                             }} 
-                            
+                            initialParams={ {userIsConnected: this.props.userIsConnected} }
                             />;
                     })}
                 </Tab.Navigator>

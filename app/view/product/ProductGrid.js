@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 export class ProductGrid extends Component {
     render(){
@@ -10,9 +10,11 @@ export class ProductGrid extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-evenly',
                 flex: 1,
+                marginVertical: 15,
                 ...this.props.style
             }
-         }>{this.props.children}</View>
+         }>
+          {this.props.children}</View>
       )
     }
 }

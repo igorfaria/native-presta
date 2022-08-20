@@ -5,8 +5,8 @@ import _l from '../../core/Language';
 export class BasePageError extends Component {
     render(){
         return (
-            <VStack spacing={ 50 } center style={ { flex: 1 } } >
-                <Text style={ { fontSize: 26, fontWeight: '500', textAlign:'center' } }>
+            <VStack spacing={ 50 } center style={ { flex: 1, padding: 10 } } >
+                <Text style={ { fontSize: 24, fontWeight: '500', textAlign:'center' } }>
                     { this.props.title ? this.props.title : _l("Title") }
                 </Text>
                 <Text>

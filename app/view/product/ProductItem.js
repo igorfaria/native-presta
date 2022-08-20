@@ -18,7 +18,6 @@ export class ProductItem extends Component {
     }
 
     render(){
-
       return (
         <VStack style={ styles.card } spacing={ 4 }>
           <TouchableOpacity onPress={ this.props.onCardPress ? this.props.onCardPress : () => { this.handleCardPress(this.props) } }>
@@ -50,10 +49,12 @@ export class ProductItem extends Component {
 
 const styles = StyleSheet.create({
     card: {
-      margin: 7,
+      margin: 10,
+      minWidth: 320,
       maxWidth: 320,
+      width: '100%',
       flexGrow: 1,
-      paddingTop: 4,
+      paddingTop: 5,
       backgroundColor: '#FFFFFF',
       borderColor: '#D9D9D9',
       borderWidth: 1,
@@ -61,18 +62,19 @@ const styles = StyleSheet.create({
     },
     actions: {
       justifyContent: 'space-between',
-      margin: 4,
+      margin: 5,
+      paddingHorizontal: 10,
     },
     price: {
-      fontSize: 8,
-      fontWeight: 500,
+      fontSize: 22,
+      fontWeight: '500',
       color: '#00a124',
       alignSelf:'center',
     },
     title: {
-      margin: 4,
-      fontSize: 8,
-      fontWeight: 500,
+      margin: 5,
+      fontSize: 18,
+      fontWeight: '500',
     },
     cover: {
       flexDirection: 'column',

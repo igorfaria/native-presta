@@ -15,6 +15,8 @@ const StyleMediaQuery = (media) => {
         }
     }); 
 
+    console.log('mediaValue', mediaValue)
+
     if(!mediaValue) mediaValue = {};
     return mediaValue;
 }

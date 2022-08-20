@@ -38,7 +38,13 @@ export class Product extends Model {
     }
 
     getCover(){
-        return 'http://presta.example.com/3-home_default/the-best-is-yet-to-come-framed-poster.jpg';
+        const data = this.getData();
+        if('id_default_image' in data){
+            const img_url = this.getRequestLink()
+                .replace('/api/', '/api/images/')
+                .replace('/products', '/products/' + data.id + '/' + data.id_default_image);
+            return img_url;
+        }
     }
 
     goToProductPage = () => {

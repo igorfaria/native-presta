@@ -1,17 +1,19 @@
 import { Component } from "react";
 import axios from "react-native-axios"; 
 import AppConfig from "./AppConfig";
+import { CacheRequest } from './CacheRequest';
 
 export class WebService extends Component {
      
     constructor(props){
         super(props);
+        const userIsConnected = !('routes' in props ) || !('params' in props.routes) ? true : props.routes.params.userIsConnected;
         this.state = {
             resource: '',
             data: {},
             body: {},
-            protocol: 'http',
-            domain: 'presta.example.com',
+            protocol: AppConfig.domain_protocol,
+            domain: AppConfig.domain_uri,
             path: '/api/',
             query: [
                 'output_format=JSON',
@@ -22,6 +24,7 @@ export class WebService extends Component {
             status: false,
             handler: (response) => {},
             cache: true,
+            userIsConnected: userIsConnected,
         };
 
         if(props && 'query' in props) {
@@ -69,13 +72,17 @@ export class WebService extends Component {
 
         const setResponse = (link, response, status)=> {
 
+            if(this.state.cache && !status) {
+                response = this.getCache(link);
+            }
+
             this.setState({
                 response: response,
-                data: (('data' in response) && (this.state.resource in response.data) !== -1) ? response.data[this.state.resource] : {},
-                status: ( status && Object.keys(this.state.data).length > 0 ),
+                data: (('data' in response)) ? response.data[this.state.resource] : {},
+                status: ( status && Object.keys(response.data).length > 0 ),
             });
 
-            if(this.state.cache) {
+            if(this.state.cache && status) {
                 // The values to be cached comes from the actual state
                 this.saveCache();
             }
@@ -83,15 +90,20 @@ export class WebService extends Component {
             this.handlerFunction(this.state.handler);
         }
 
+
         // If is to use cache responses
-        if(this.state.cache){
-            const userIsConnected = true;
-            const cache = this.getCache(link, userIsConnected);
-            // If there is a valid cache response 
-            if(cache && 'status' in cache && cache.status == true && 'link' in cache && 'response' in cache){
-                setResponse(link, cache.response, true)
-                return cache;
-            }
+        if(false && this.state.cache){
+            const getCache = this.getCache(link);
+            getCache.then(r => {
+                if(r){
+                    console.log('CACHEEE', r)
+                    const cache = JSON.parse(r)
+                    if(cache && 'status' in cache && cache.status == true && 'link' in cache && 'response' in cache){
+                        setResponse(link, cache.response, true)
+                        return cache;
+                    }
+                }
+            })
         }
 
         const response = await axios.get(
@@ -118,12 +130,25 @@ export class WebService extends Component {
     }
 
     saveCache(){
-        // resource, response from the state 
-        console.log('Status', this.state.status, 'from', this.state.resource, this.getRequestLink(), 'with response', this.state.response);
+        if( !this.state.status ) return false;
+        const data = {
+            status: this.state.status,
+            resource: this.state.resource,
+            link: this.getRequestLink(),
+            response: this.state.response,
+        }
+        return new CacheRequest({key: data.link}).write(data);
     }
 
-    getCache(link, userIsConnected){
-        // look to see if there is a valid cache < 5 or the user is offline 
+    getCache(link){
+        return getCache(link,this.state.userIsConnected)
     }
 
+}
+
+const getCache = (link, userIsConnected) => {
+    if(true || !userIsConnected){
+        const cache = new CacheRequest({key: link})
+        return cache.read()
+    } 
 }

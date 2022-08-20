@@ -5,6 +5,7 @@ import { Products } from "../../model/resource/Products";
 import { SearchBar } from "../_parts/SearchBar";
 import { SwiperSlider } from "../_parts/SwiperSlider";
 import { ProductGrid } from "../product/ProductGrid";
+import StyleMediaQuery from "../../component/StyleMediaQuery";
 
 export class HomePage extends Component {
 
@@ -16,12 +17,17 @@ export class HomePage extends Component {
         return {
             optionsWrapper: {
                 style: {
-                    height: '50vh',
+                    height: 200,
+                    ...StyleMediaQuery({
+                        768: {
+                        height: 350,
+                        }
+                    }),
                     backgroundColor: 'lime',
                 }
             },
             options: {
-                horizontal: false,
+                horizontal: true,
                 showsButtons: false,
             },
             optionsSlide: {
@@ -70,22 +76,20 @@ export class HomePage extends Component {
                 { ...this.sliderHomeOptions() }
                 slides={ this.slidesHome() }
             />
+            <ProductGrid><Products {...this.props} query={{limit: 6}} /></ProductGrid>
         </ScrollView>
         );
     }
 }
-// <ProductGrid><Products {...this.props} query={{limit: 3}} /></ProductGrid>
 
 const styles = StyleSheet.create({
     title: {
-        marginTop: 4,
-        marginBottom: 4,
-        fontSize: 8,
+        marginVertical: 5,
+        fontSize: 18,
         fontWeight: 600,
     },
     container: {
         flex: 1,
-        padding: 4,
-        overflow: 'hidden',
+        padding: 10,
     }
 });

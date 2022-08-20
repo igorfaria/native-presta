@@ -1,4 +1,4 @@
-import { Controller } from "../core/@exports";
+import { Controller } from "../core/Controller";
 import { HomePage } from "../view/home/HomePage";
 
 export class HomeController extends Controller {

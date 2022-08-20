@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { StyleSheet, TextInput } from "react-native";
-import { Stack, HStack, VStack, IconButton } from '@react-native-material/core';
+import { Stack, HStack, IconButton } from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import _l from "../../core/Language";
 
@@ -26,7 +26,7 @@ export class SearchBar extends Component {
             <HStack center style={ styles.inputContainer }>
                 <TextInput
                     ref='InputSearch'
-                    underlineColorAndroid={'trnasparent'}
+                    underlineColorAndroid={'transparent'}
                     onChangeText={this.handleTextChange}
                     style={ styles.searchInput }
                     placeholder={ _l("Search for anything...", lDomain) }
@@ -47,30 +47,31 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: "center",
         alignItems: "center",
-        marginVertical: 1,
+        marginTop:10,
+        marginBottom: 15,
     },
     searchInput: {
         flex: 1,
         backgroundColor: 'white',
-        fontSize: 4,
-        padding: 4,
+        fontSize: 16,
+        padding: 5,
     },
     inputContainer: {
         backgroundColor: 'white',
         borderRadius: 100,
         paddingStart: 8,
-        width: '94vw',
+        width: '94%',
         ...StyleMediaQuery({
             1024: {
-                width: '60vw',
+                width: '60%',
             }
         }),
     },
     buttonSearch: {
-        marginRight: 2,
+        marginRight: 5,
         backgroundColor: '#f5f5f5'
     },
     iconSearch: {
-        fontSize: 4,
+        fontSize: 22,
     }
 });

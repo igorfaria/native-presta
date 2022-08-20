@@ -8,7 +8,7 @@ export class ProductsController extends Controller {
     render(){
         return (
             <ScrollView style={ styles.container }>
-                <ProductGrid><Products {...this.props} query={{limit: 3}} /></ProductGrid>
+                <ProductGrid><Products {...this.props} query={{limit: 21}} /></ProductGrid>
             </ScrollView>
         );
     }
@@ -18,6 +18,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 1,
-        overflow: 'hidden',
     }
 });
