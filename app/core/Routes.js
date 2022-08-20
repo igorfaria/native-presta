@@ -29,7 +29,6 @@ const routes = [{
     controller: ProductScreen,
     hidden: true,
     modal: true,
-    headerShown: true,
   },
   {
     name: "products", 
