@@ -28,6 +28,8 @@ const routes = [{
     icon: "apps",
     controller: ProductScreen,
     hidden: true,
+    modal: true,
+    headerShown: true,
   },
   {
     name: "products", 
@@ -42,6 +44,7 @@ const routes = [{
     path: _l("/cart"),
     icon: "cart",
     controller: Screen404,
+    headerShown: true,
   },
   {
     name: "account",
@@ -49,6 +52,7 @@ const routes = [{
     path: _l("/account"),
     icon: "account-circle-outline",
     controller: Screen404,
+    headerShown: true,
   },
 ];
 

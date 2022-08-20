@@ -1,22 +1,13 @@
-import { Controller } from "../core/Controller";
-import { StyleSheet, ScrollView } from "react-native";
-import { ProductGrid } from "../view/product/ProductGrid";
-import { Products } from "../model/resource/Products";
+import { Controller } from '../core/Controller' 
+import { ProductsPage } from '../view/products/ProductsPage'
 
 export class ProductsController extends Controller {
 
+    constructor(props){
+        super(props)
+    }
+
     render(){
-        return (
-            <ScrollView style={ styles.container }>
-                <ProductGrid><Products {...this.props} query={{limit: 21}} /></ProductGrid>
-            </ScrollView>
-        );
+        return <ProductsPage {...this.props} />
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 1,
-    }
-});

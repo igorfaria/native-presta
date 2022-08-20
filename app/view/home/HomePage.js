@@ -71,7 +71,9 @@ export class HomePage extends Component {
     render(){
         return (
         <ScrollView style={ styles.container }>
+            
             <SearchBar search={ _l("Search value") } />
+            
             <SwiperSlider 
                 { ...this.sliderHomeOptions() }
                 slides={ this.slidesHome() }
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     title: {
         marginVertical: 5,
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: '600',
     },
     container: {
         flex: 1,
