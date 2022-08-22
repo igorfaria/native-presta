@@ -49,9 +49,7 @@ const styles = StyleSheet.create({
     title: {
         marginVertical: 15,
         fontSize: 24,
-        color: 'red',
         fontWeight: '600',
-        backgroundColor: 'lime',
     },
     slideWrapper: {
         maxHeight: 400,
@@ -59,12 +57,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        backgroundColor: 'blue'
     },
     scrollContainer: {
         flex: 1,
         padding: 10,
-        backgroundColor: 'gold',
         minHeight: 5000,
     }
 })
