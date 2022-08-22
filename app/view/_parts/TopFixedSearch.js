@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 import { VStack, HStack, IconButton } from '@react-native-material/core'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { SearchBar } from '../_parts/SearchBar'
-import StyleMediaQuery from '../../component/StyleMediaQuery'
 import _l from '../../core/Language'
  
 export class TopFixedSearch extends Component {
