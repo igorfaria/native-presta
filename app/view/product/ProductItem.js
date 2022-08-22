@@ -11,12 +11,13 @@ export class ProductItem extends Component {
       super(props);
     }
 
-    handleButtonPress(){
-      alert('Add to cart');
+    handleButtonPress({navigation, id}){
+      alert('Add to cart ' + id.id);
     }
 
-    handleCardPress({navigation, id}){
-      navigation.navigate('product', {id});
+    handleCardPress(props){
+      const {navigation, data} = props
+      navigation.navigate('product', data);
     }
 
     render(){
@@ -34,7 +35,7 @@ export class ProductItem extends Component {
                       style={ styles.button }
                       mode="contained"
                       disableElevation
-                      onPress={ this.props.onButtonPress ? this.props.onButtonPress : this.handleButtonPress }
+                      onPress={ this.props.onButtonPress ? this.props.onButtonPress : () => { this.handleButtonPress(this.props) } }
                       title={ this.props.buttonLabel ? this.props.buttonLabel : _l('View more') }
                     />  
 
@@ -43,7 +44,7 @@ export class ProductItem extends Component {
                       mode="contained"
                       disableElevation
                       compact
-                      onPress={ this.props.onButtonPress ? this.props.onButtonPress : this.handleButtonPress }
+                      onPress={ this.props.onButtonPress ? this.props.onButtonPress : () => { this.handleButtonPress(this.props) } }
                       title={<Icon name="cart-plus" style={ styles.buttonMobile } />}
                     />  
 

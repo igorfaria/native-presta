@@ -10,25 +10,50 @@ import StyleMediaQuery from "../../component/StyleMediaQuery";
 const lDomain = 'SearchBar';
 
 export class SearchBar extends Component {
+
+    constructor(props){
+        super(props)
+        
+        this.state = {
+            containerStyle: !('containerStyle' in props) ? {} : this.handleStyle(props.containerStyle),
+            containerInputStyle: !('containerInputStyle' in props) ? {} : this.handleStyle(props.containerInputStyle),
+            textInputStyle: !('textInputStyle' in props) ? {} : this.handleStyle(props.textInputStyle),
+            
+        }
+    }
     
+    handleStyle(style){
+        let parsedStyle = {}
+        if(typeof style == 'number') parsedStyle = StyleSheet.flatten(style)
+        if(typeof style == 'object') parsedStyle = style
+        return parsedStyle
+    }
+
     handleTextChange(search){
-        console.log('SearchBar.handleTextChange', search);
+        console.log('SearchBar.handleTextChange', search)
     }
 
     handleTouchContainer(){
-        console.log(this);
+        const slides = []
+        console.log(this)
+        return slides
     }
 
     render(){
+
+        const containerInputStyle = {...StyleSheet.flatten(styles.inputContainer), ...this.state.containerInputStyle}
+        const containerStyle = {...StyleSheet.flatten(styles.container), ...this.state.containerStyle}
+        const textInputStyle = {...StyleSheet.flatten(styles.searchInput), ...this.state.textInputStyle}
+
         return (
-        <Stack center>
-            <HStack style={ styles.container }>
-            <HStack center style={ styles.inputContainer }>
+        <Stack center style={ { width: '100%'} }>
+            <HStack style={ containerStyle }>
+            <HStack center style={ containerInputStyle }>
                 <TextInput
                     ref='InputSearch'
                     underlineColorAndroid={'transparent'}
                     onChangeText={this.handleTextChange}
-                    style={ styles.searchInput }
+                    style={ textInputStyle }
                     placeholder={ _l("Search for anything...", lDomain) }
                 />
                 <IconButton
@@ -59,6 +84,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         backgroundColor: 'white',
         borderRadius: 100,
+        paddingVertical: 3,
         paddingStart: 8,
         width: '94%',
         ...StyleMediaQuery({

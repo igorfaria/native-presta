@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { Modal } from "react-native-web";
 
 const Tab = createBottomTabNavigator();
 const MainStack = createNativeStackNavigator();

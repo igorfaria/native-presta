@@ -29,6 +29,7 @@ export class HomePage extends Component {
             options: {
                 horizontal: true,
                 showsButtons: false,
+                showsPagination: false,
             },
             optionsSlide: {
                 style: {

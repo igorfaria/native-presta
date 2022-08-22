@@ -7,22 +7,57 @@ export class Product extends Model {
     constructor(props){
         super(props);
         this.state.resource = 'products';
+        const data = ('id' in props) ? props : false
+        if(data){
+            this.state.data = data
+            if('id' in this.state.data) this.state.resource += `/${this.state.data.id}`
+        }
+    
     }
 
-    async getProduct(){
-        const data = this.getData();
-        if('id' in this.props) this.state.data = await this.get(this.props.id);
-        return false;
+    async getProduct(id){
+        const hasProducts = ('data' in this.state && 'products' in this.state.data && this.state.data.products.length)
+
+        if(!hasProducts) {
+            await this.get()
+            .then(t => {
+                this.state.data = t
+                t.data.products.forEach(product => {
+                    if('id' in product && product.id == id){
+                        this.setState({data: product})
+                    }
+                })
+                return this
+            })
+            .catch(c => {
+                return c
+            }) 
+            .finally(f => {
+                return f
+            })
+        } else {
+            this.state.data.products.forEach(product => {
+                if('id' in product && product.id == id){
+                    this.state.data = product
+                }
+            })
+        }
+       
+        return this.getData();
     }
 
     getId(){
-        if('id' in this.props) return this.props.id;
+        const data = this.getData()
+        if('id' in data) return data.id;
         return 0;
     }
 
     getData(){
-        if('data' in this.props) return this.props.data;
-        return {};
+        const params = this.props.route ? this.props.route.params : {}
+        const state = this.state.data && this.state.data.length ? this.state.data : {}
+        const props = this.props && this.props.data ? this.props.data : {}
+        const data = {...props, ...params, ...state} 
+        return data;
     }
 
     getName(){
@@ -38,13 +73,28 @@ export class Product extends Model {
     }
 
     getCover(){
-        const data = this.getData();
+        const data = this.getData()
         if('id_default_image' in data){
-            const img_url = this.getRequestLink()
-                .replace('/api/', '/api/images/')
-                .replace('/products', '/products/' + data.id + '/' + data.id_default_image);
-            return img_url;
+            return this.getImageUri(data.id, data.id_default_image)
         }
+    }
+
+    getImageUri(productId, imageId){
+        return this.createRequestLink(false, `images/products/${productId}/${imageId}`)
+    }
+
+    getImages(){
+        const data = this.getData()
+        const images = []
+        if('associations' in data && 'images' in data.associations){
+            data.associations.images.map(img => {
+                images.push({
+                    id: img.id,
+                    uri: this.getImageUri(data.id, img.id)
+                })
+            })
+        }
+        return images 
     }
 
     goToProductPage = () => {
