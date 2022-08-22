@@ -1,10 +1,10 @@
-import { Component } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { Product } from '../../model/resource/Product'
 import { VStack, Text, Button } from '@react-native-material/core'
 import _l from '../../core/Language'
 import { TopFixedSearch } from '../_parts/TopFixedSearch'
 import { ProductGallery } from './ProductGallery'
+import { Dimensions } from 'react-native'
 
 export class ProductPage extends Product {
 
@@ -29,15 +29,28 @@ export class ProductPage extends Product {
     }
 
     render(){
+        const screenHeight = Dimensions.get('window').height
         return (
         <VStack styles={ styles.container }>  
-            <ScrollView style={ styles.scrollContainer }>
+            <ScrollView
+                contentContainerStyle={ 
+                    {...StyleSheet.flatten(styles.scrollContainer), height: screenHeight} } >
                 <TopFixedSearch {...this.props} />
                 <Text style={ styles.title }>{this.getName()}</Text>
                 <ProductGallery 
                     optionsWrapper = { {style: styles.slideWrapper} }
                     slides={this.getImages()}
                 />
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
+                <Text>Lorem</Text>
             </ScrollView>
         </VStack>
         )
@@ -55,12 +68,13 @@ const styles = StyleSheet.create({
         maxHeight: 400,
     },
     container: {
-        flex: 1,
-        padding: 10,
+       flex: 1,
     },
     scrollContainer: {
-        flex: 1,
+        flexGrow: 1,
+        overflow: 'scroll',
         padding: 10,
-        minHeight: 5000,
+        paddingBottom: 50,
+        backgroundColor: '#e5e5e5',
     }
 })
