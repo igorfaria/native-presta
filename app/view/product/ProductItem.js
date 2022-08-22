@@ -27,7 +27,10 @@ export class ProductItem extends Component {
                 
                 <Text variant="h1" style={ styles.title }>{ this.props.name }</Text>
                 
-                <Image style={ styles.cover } source={{ uri: this.props.cover }} resizeMode={ 'cover' }  />
+                <HStack style={ styles.coverContainer }>
+                  <Image style={ {...StyleSheet.flatten(styles.cover), ...StyleSheet.flatten(styles.coverBg) } } source={{ uri: this.props.cover }} resizeMode={ 'cover' }  />
+                  <Image style={ styles.cover } source={{ uri: this.props.cover }} resizeMode={ 'contain' }  />
+                </HStack>
 
                 <HStack m={ 4 } style={ styles.actions }>
                   <Text style={ styles.price }>{ this.props.price }</Text>
@@ -112,14 +115,27 @@ const styles = StyleSheet.create({
         }
     }),
     },
-    cover: {
-      flexDirection: 'column',
+    coverContainer: {
+      overflow: 'hidden',
+      flex: 1,
+      backgroundColor: '#ccc',
       minHeight: 200,
       ...StyleMediaQuery({
           1024: {
             minHeight: 250,
           }
       }),
+    },
+    cover: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+    },
+    coverBg: {
+       width: '1000%',
+       height: '1000%'
     },
     button: {
       display: 'none',
