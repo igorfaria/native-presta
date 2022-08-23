@@ -7,31 +7,18 @@ export class CacheRequest extends Component {
     constructor(props){
         super(props);
         this.state = {
-            key: md5( ('key' in props) ? props.key : (new Date().toISOString()) ),
+            key: md5(  props?.key ?? (new Date().toISOString()) ),
         }
     }
 
-    setKey = (key) => {
-        this.updateState({
-            key: md5(key)
-        })
-    } 
+    setKey = (key) => this.updateState({ key: md5(key) })
+    getKey = () => this.state.key
 
-    getKey = () => {
-        return this.state.key
-    }
-
-    write = (content) => {
-        return storeData(this.getKey(), content)
-    }
-  
-    read = () => {
-        return getData(this.getKey())
-    }
+    read = () => getData(this.getKey())
+    write = (content) => storeData(this.getKey(), content)
     
-    delete = () => {
-        return removeData(this.getKey())
-    }
+    delete = () =>  removeData(this.getKey())
+    deleteAll = () => AsyncStorage.clear().then(() => true)
 
 }
 
