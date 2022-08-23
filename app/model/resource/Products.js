@@ -32,7 +32,6 @@ export class Products extends Product {
                         return <Product
                             {...this.props}
                             key={product.id}
-                            id={product}  
                             data={product}
                             buttonLabel={'BUY NOW'} />
                     } )   
@@ -40,7 +39,7 @@ export class Products extends Product {
                 </>
             )
         }
-        return (<></>)
+        return null
     }
     
 }

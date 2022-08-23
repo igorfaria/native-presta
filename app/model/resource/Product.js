@@ -1,12 +1,12 @@
-import AppConfig from "../../core/AppConfig";
-import { Model } from "../../core/Model";
-import { ProductItem } from "../../view/product/ProductItem";
+import AppConfig from '../../core/AppConfig'
+import { Model } from '../../core/Model'
+import { ProductItem } from '../../view/product/ProductItem'
 
 export class Product extends Model {
 
     constructor(props){
         super(props);
-        this.state.resource = 'products';
+        this.state.resource = 'products'
         const data = ('id' in props) ? props : false
         if(data){
             this.state.data = data
@@ -16,15 +16,14 @@ export class Product extends Model {
     }
 
     getId(){
-        return this.getData()?.id ?? 0
+        return this.getData()?.id
     }
 
     getData(){
-        const params = this.props?.route ?? {}
+        const params = this.props?.route?.params ?? {}
         const state = this.state?.data ?? {}
         const props = this.props?.data ?? {}
-        const data = {...params, ...props, ...state} 
-        return data;
+        return { ...props,...params, ...state}
     }
 
     getName(){
@@ -38,7 +37,7 @@ export class Product extends Model {
 
     getCover(){
         const data = this.getData()
-        return ('id_default_image' in data) ? this.getImageUri(data.id, data.id_default_image) : false
+        return ('id_default_image' in data) ? this.getImageUri(this.getId(), data.id_default_image) : false
     }
 
     getImageUri(productId, imageId){
@@ -65,26 +64,22 @@ export class Product extends Model {
     }
 
     goToProductPage = () => {
-        const id = this.getId();
+        const id = this.getId()
      }
 
     addProductToCart = () => {
-        alert('Add product to cart: ' + this.getId());
+        alert('Add product to cart: ' + this.getId())
     }
 
     render(){
-        return (
-            <>
-                <ProductItem
+        return (<ProductItem
                     {...this.props}
                     id={this.getId()}
                     name={this.getName()}
                     price={this.getPrice()}
                     cover={this.getCover()}
                     buttonLabel={this.props.buttonLabel ? this.props.buttonLabel : 'View more'}
-                    />
-            </>
-        );
+                    />)
     }
 
 }
