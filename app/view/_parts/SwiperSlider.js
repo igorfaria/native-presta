@@ -18,16 +18,17 @@ export class SwiperSlider extends Component {
       }
     }
     render(){
-      const slides = this.props.slides
+      const slides = [...this.props.slides]
+      const wrapperStyle = {...StyleSheet.flatten(styles.wrapper), ...(this.state.optionsWrapper.style || {})}
       return (
-          <View style={styles.wrapper} {...this.state.optionsWrapper} >
-            <View style={ {flex: 1 } }>
+          <View {...this.state.optionsWrapper} style={ wrapperStyle } >
+            <View style={ {flex: 1, maxWidth: '100%' } }>
             <Swiper {...this.state.options}>
             {slides.map((item, idx) => {
               const slideStyle =  Object.assign({}, 
                 StyleSheet.flatten(styles.slide), 
-                (this.state.optionsSlide.style ? this.state.optionsSlide.style : {}),
-                item.style ? item.style: {}
+                this.state.optionsSlide.style || {},
+                item.style || {}
               );
               return (
                 <View 

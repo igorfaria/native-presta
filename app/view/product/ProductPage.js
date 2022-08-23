@@ -1,10 +1,12 @@
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, Dimensions, ScrollView, View, Image } from 'react-native'
 import { Product } from '../../model/resource/Product'
-import { VStack, Text, Button } from '@react-native-material/core'
+import { Text } from '@react-native-material/core'
 import _l from '../../core/Language'
 import { TopFixedSearch } from '../_parts/TopFixedSearch'
 import { ProductGallery } from './ProductGallery'
-import { Dimensions } from 'react-native'
+import StyleMediaQuery from '../../component/StyleMediaQuery'
+
+const lDomain = 'productPage'
 
 export class ProductPage extends Product {
 
@@ -29,30 +31,33 @@ export class ProductPage extends Product {
     }
 
     render(){
-        const screenHeight = Dimensions.get('window').height
+        const screenHeight = Dimensions.get('screen').height
         return (
-        <VStack styles={ styles.container }>  
+        <>  
+            <TopFixedSearch {...this.props} />
             <ScrollView
-                contentContainerStyle={ 
-                    {...StyleSheet.flatten(styles.scrollContainer), height: screenHeight} } >
-                <TopFixedSearch {...this.props} />
-                <Text style={ styles.title }>{this.getName()}</Text>
-                <ProductGallery 
-                    optionsWrapper = { {style: styles.slideWrapper} }
-                    slides={this.getImages()}
-                />
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
-                <Text>Lorem</Text>
+                contentContainerStyle={ styles.scrollContainer } >
+                
+                <View style={ styles.container }>
+
+                    <Text style={ styles.title }>{this.getName()}</Text>
+                    
+                    <View style={{maxWidth: '100%'}}>
+                        <ProductGallery 
+                            optionsWrapper = { {style: styles.slideWrapper} }
+                            slides={this.getImages()}
+                            />
+                    </View>
+                    
+                    <View style={ styles.descriptionContainer }>
+                        <Text style={ styles.subtitle }>{_l('Description', lDomain)}</Text>
+                        
+                        <Text>{this.getDescription()}</Text>
+                        
+                    </View>
+                </View>
             </ScrollView>
-        </VStack>
+        </>
         )
     }
 
@@ -64,17 +69,32 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '600',
     },
+    subtitle: {
+        marginVertical: 10,
+        fontSize: 18,
+        fontWeight: '600',
+    },
     slideWrapper: {
-        maxHeight: 400,
+        maxHeight: 250,
     },
     container: {
-       flex: 1,
+        alignItems: 'flex-start',
     },
     scrollContainer: {
-        flexGrow: 1,
-        overflow: 'scroll',
         padding: 10,
-        paddingBottom: 50,
+        marginTop: 90,
+        paddingBottom: 100,
+        ...StyleMediaQuery({
+            650: {
+                paddingBottom: 10, 
+            }
+        }),
         backgroundColor: '#e5e5e5',
+    },
+    descriptionContainer: {
+        width: '100%',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        marginVertical: 15,
+        padding: 5,
     }
 })

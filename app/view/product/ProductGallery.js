@@ -1,5 +1,5 @@
 import { SwiperSlider } from '../_parts/SwiperSlider'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, Text } from 'react-native'
 
 export class ProductGallery extends SwiperSlider {
 
@@ -48,10 +48,9 @@ export class ProductGallery extends SwiperSlider {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#ccc',
         width: '100%',
         height: '100%',
+        backgroundColor: '#ccc',
     },
     slide: {
         padding: 0,
