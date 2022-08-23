@@ -24,27 +24,24 @@ export class CacheRequest extends Component {
 
 const storeData = (key, value) => {
     try {
-        const storingValue = (typeof value == 'object') ? JSON.stringify(value) : value
-        AsyncStorage.setItem(key, storingValue)
+        return AsyncStorage.setItem(key, (typeof value == 'object') ? JSON.stringify(value) : value)
     } catch (e) {
         return e
     }
-    return true
 }
 
 const getData = (key) => {
     try {
         return AsyncStorage.getItem(key)
     } catch(e) {
-      return e
+        return e
     }
   }
   
 const removeData = (key) => {
     try {
-      AsyncStorage.removeItem(key)
+        return AsyncStorage.removeItem(key)
     } catch(e) {
-      return e
+        return e
     }
-    return true
   }
