@@ -48,16 +48,19 @@ export class TopFixedSearch extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 0,
         backgroundColor: '#f0f0f0',
-        paddingVertical: 35,
+        paddingVertical: 10,
         paddingHorizontal: 5,
         borderRadius: 3,
-        marginTop: 40,
+        marginTop: 0,
         alignContent: 'center',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        position: 'absolute',
+        top: 0, left: 0,
+        width: '100%',
+        zIndex: 10,
     },
     containerColumn: {
     }, 
