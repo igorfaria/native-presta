@@ -71,6 +71,13 @@ export class Product extends Model {
         alert('Add product to cart: ' + this.getId())
     }
 
+    dataFromParams(){
+        if('route' in this.props && 'id' in this.props.route.params) {
+            let fromParams = {...this.props.route.params}
+            this.state.data = fromParams
+        }
+    }
+
     render(){
         return (<ProductItem
                     {...this.props}

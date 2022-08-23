@@ -1,7 +1,7 @@
-import { SwiperSlider } from '../_parts/SwiperSlider'
-import { View, Image, StyleSheet, Text } from 'react-native'
+import { SwiperSlider } from '../../_parts/SwiperSlider'
+import { View, Image, StyleSheet } from 'react-native'
 
-export class ProductGallery extends SwiperSlider {
+export class Gallery extends SwiperSlider {
 
     constructor(props){
         super(props)
@@ -37,16 +37,21 @@ export class ProductGallery extends SwiperSlider {
     }
 
     render(){
-        return <SwiperSlider 
-                {...this.props}
-                {...this.state} 
-                slides={this.getSlides()}
+        return (
+            <View style={ styles.wrapper }>
+                <SwiperSlider 
+                    {...this.props} {...this.state} 
+                    slides={this.getSlides()}
                 />
-        
+            </View>
+        )
     }
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+        maxWidth: '100%'
+    },
     container: {
         width: '100%',
         height: '100%',

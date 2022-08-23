@@ -1,11 +1,14 @@
-import { StyleSheet, Dimensions, ScrollView, View, Image } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Product } from '../../model/resource/Product'
-import { Text } from '@react-native-material/core'
-import _l from '../../core/Language'
-import { TopFixedSearch } from '../_parts/TopFixedSearch'
-import { ProductGallery } from './ProductGallery'
-import StyleMediaQuery from '../../component/StyleMediaQuery'
 
+import { TopFixedSearch } from '../_parts/TopFixedSearch'
+import { ScrollContainer } from '../_parts/ScrollContainer'
+import { Section } from './_parts/Section'
+import { Title } from './_parts/Title'
+import { Description } from './_parts/Description'
+import { Gallery } from './_parts/Gallery'
+
+import _l from '../../core/Language'
 const lDomain = 'productPage'
 
 export class ProductPage extends Product {
@@ -14,49 +17,31 @@ export class ProductPage extends Product {
         super(props)
         this.dataFromParams()
     }
-
-    dataFromParams(){
-        if('route' in this.props && 'id' in this.props.route.params) {
-            let fromParams = {...this.props.route.params}
-            this.state.data = fromParams
-        }
-    }
   
-    componentDidUpdate(){
-        this.dataFromParams()
-    }
-
-    componentDidMount(){
-        this.dataFromParams()
-    }
-
+    componentDidUpdate = () => this.dataFromParams()
+    componentDidMount = () => this.dataFromParams()
+    
     render(){
-        const screenHeight = Dimensions.get('screen').height
+        const topFixedProps = {'navigation': this.props.navigation, 'route': this.props.route }
         return (
         <>  
-            <TopFixedSearch {...this.props} />
-            <ScrollView
-                contentContainerStyle={ styles.scrollContainer } >
+            <TopFixedSearch {...topFixedProps} />
+            
+            <ScrollContainer>
+                    
+                    <Title style={ {marginHorizontal: 15} } content={this.getName()} />
                 
-                <View style={ styles.container }>
-
-                    <Text style={ styles.title }>{this.getName()}</Text>
+                    <Gallery 
+                        optionsWrapper = { {style: styles.slideWrapper} }
+                        slides={this.getImages()} />
                     
-                    <View style={{maxWidth: '100%'}}>
-                        <ProductGallery 
-                            optionsWrapper = { {style: styles.slideWrapper} }
-                            slides={this.getImages()}
-                            />
-                    </View>
+                    <Section>     
+                       <Description 
+                            title={ _l('Description', lDomain) }
+                            content={ this.getDescription() } />
+                    </Section>
                     
-                    <View style={ styles.descriptionContainer }>
-                        <Text style={ styles.subtitle }>{_l('Description', lDomain)}</Text>
-                        
-                        <Text>{this.getDescription()}</Text>
-                        
-                    </View>
-                </View>
-            </ScrollView>
+            </ScrollContainer>
         </>
         )
     }
@@ -69,32 +54,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '600',
     },
-    subtitle: {
-        marginVertical: 10,
-        fontSize: 18,
-        fontWeight: '600',
-    },
     slideWrapper: {
         maxHeight: 250,
-    },
-    container: {
-        alignItems: 'flex-start',
-    },
-    scrollContainer: {
-        padding: 10,
-        marginTop: 90,
-        paddingBottom: 100,
-        ...StyleMediaQuery({
-            650: {
-                paddingBottom: 10, 
-            }
-        }),
-        backgroundColor: '#e5e5e5',
-    },
-    descriptionContainer: {
-        width: '100%',
-        backgroundColor: 'rgba(255,255,255,0.5)',
-        marginVertical: 15,
-        padding: 5,
     }
 })
