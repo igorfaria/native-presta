@@ -47,13 +47,13 @@ export class SwiperSlider extends Component {
 
 const styles = StyleSheet.create({
     wrapper: {
+        flex: 1,
         maxHeight: 350,
     },
     slide: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#FFFFFF',
       fontSize: 30,
       fontWeight: 'bold',
       padding: 10,

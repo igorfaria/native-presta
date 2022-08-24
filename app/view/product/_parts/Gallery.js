@@ -8,7 +8,8 @@ export class Gallery extends SwiperSlider {
         this.state.slides = [...props.slides]
         this.state.options = {
             autoplay: true,
-            showsButtons: this.getShowsButtons() ? true : false,
+            showsButtons: this.getShowsButtons(),
+            showsPagination: false,
         }
     }
 
@@ -30,8 +31,8 @@ export class Gallery extends SwiperSlider {
     getContent(slide){
         return (
             <View style={ styles.container }>
-                <Image style={ {...StyleSheet.flatten(styles.slideItem), ...StyleSheet.flatten(styles.cover) }} blurRadius={10} source={{ uri: slide.uri }} resizeMode={ 'cover' }  />
                 <Image style={ styles.slideItem } source={{ uri: slide.uri }} resizeMode={ 'contain' }  />
+                <Image style={ {...StyleSheet.flatten(styles.slideItem), ...StyleSheet.flatten(styles.cover) }} blurRadius={10} source={{ uri: slide.uri }} resizeMode={ 'cover' }  />
             </View>
         )
     }
@@ -50,27 +51,30 @@ export class Gallery extends SwiperSlider {
 
 const styles = StyleSheet.create({
     wrapper: {
-        maxWidth: '100%'
+        minHeight: 250,
+        maxWidth: '100%',
     },
     container: {
         width: '100%',
         height: '100%',
-        backgroundColor: '#ccc',
     },
     slide: {
+        flex: 1,
         padding: 0,
     },
     slideItem: {
+        zIndex: 1,
+        width: '100%',
+        height: '100%'
+    },
+    cover: {
         position: 'absolute',
         top: 0, 
         left: 0, 
         right: 0, 
         bottom: 0,
-        width: '100%',
-        height: '100%',
-    },
-    cover: {
         width: '1000%',
-        height: '1000%'
+        height: '1000%',
+        zIndex: 0,
     }
 })
