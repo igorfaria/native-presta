@@ -48,7 +48,6 @@ export class TopFixedSearch extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 0,
         backgroundColor: '#f0f0f0',
         paddingVertical: 10,
         paddingHorizontal: 5,
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
         top: 0, left: 0,
         width: '100%',
         zIndex: 10,
+        elevation: 1,
     },
     containerColumn: {
     }, 
