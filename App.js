@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
-import AppConfig from "./app/core/AppConfig";
-import routes from "./app/core/Routes";
-import { AppRegistry, View, StyleSheet, Text } from "react-native";
-import { ActivityIndicator } from "@react-native-material/core"
-import { useNetInfo } from '@react-native-community/netinfo';
-import { BottomNav } from "./app/view/_parts/BottomNav";
-import { NotConnected } from "./app/view/error/NotConnected"; 
-import { WebService } from "./app/core/WebService";
-import _l from "./app/core/Language";
+import { useState, useEffect } from 'react'
+import AppConfig from './app/core/AppConfig'
+import routes from './app/core/Routes'
+import { AppRegistry, View, StyleSheet, StatusBar  } from 'react-native'
+import { ActivityIndicator } from '@react-native-material/core'
+import { useNetInfo } from '@react-native-community/netinfo'
+import { BottomNav } from "./app/view/_parts/BottomNav"
+import { NotConnected } from "./app/view/error/NotConnected" 
+import { WebService } from "./app/core/WebService"
+import _l from "./app/core/Language"
 
 export default function App(){
+
+  useEffect(() => {
+    StatusBar.setHidden(true)
+   }, []);
 
   const [isAPIReachable, setisAPIReachable] = useState(false);
   const netInfo = useNetInfo();
