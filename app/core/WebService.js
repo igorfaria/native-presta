@@ -82,7 +82,7 @@ export class WebService extends Component {
 
         // If is to use cache responses
         const getCache = this.getCache(link)
-        if(this.state.cache){
+        if(!this.props.check && this.state.cache){
             getCache.then(cache => {
                 cache = JSON.parse(cache)
                 
@@ -91,7 +91,7 @@ export class WebService extends Component {
                     this.tryToRefreshCache()
                     return cache
                 }
-
+                
                 return this.doRequest(link)
             })
         } else {

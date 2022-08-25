@@ -2,16 +2,19 @@
   ICONS 
   https://oblador.github.io/react-native-vector-icons/
 */
-import _l from "../core/Language";
-import { HomeController } from "../controller/HomeController";
-import { ProductController } from "../controller/ProductController";
-import { ProductsController } from "../controller/ProductsController";
-import { Page404 } from "../view/error/Page404";
+import _l from '../core/Language'
+import { HomeController } from '../controller/HomeController'
+import { ProductController } from '../controller/ProductController'
+import { ProductsController } from '../controller/ProductsController'
+import { CartController } from '../controller/CartController'
+import { Page404 } from '../view/error/Page404'
 
 const HomeScreen = props => <HomeController {...props} />
 const ProductScreen = props => <ProductController {...props} />
 const ProductsScreen = props => <ProductsController {...props} />
+const CartScreen = props => <CartController {...props} />
 const Screen404 = props => <Page404 title={ _l("404 Screen") } content={ _l("The screen for this page was not created yet :D")} />
+
 
 const routes = [{
     name: "home",
@@ -42,7 +45,7 @@ const routes = [{
     title: _l("Cart"),
     path: _l("/cart"),
     icon: "cart",
-    controller: Screen404,
+    controller: CartScreen,
     headerShown: true,
   },
   {
