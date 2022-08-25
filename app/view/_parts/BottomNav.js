@@ -23,21 +23,29 @@ export class BottomNav extends Component {
     createStack(name, routes, screenOptions){
         return ( 
         <MainStack.Group {...screenOptions}>
-            {routes.map((route, i) => { return createElement( name,
-                {
+            {routes.map((route, i) => { 
+                const routeParams = {
                     key: i,
                     name: route.name,
                     component: route.controller,
                     options: {
-                    tabBarItemStyle: { display: ('hidden' in route && route.hidden) ? 'none' : 'flex' },
-                    headerShown: (('headerShown' in route) ? route.headerShown : false),
-                    title: route.title,
-                    tabBarIcon: ({ color, size }) => (
-                        <Icon name={route.icon} color={color} size={size} />
-                    )
+                        tabBarItemStyle: { display: ('hidden' in route && route.hidden) ? 'none' : 'flex' },
+                        headerShown: (('headerShown' in route) ? route.headerShown : false),
+                        title: route.title,
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name={route.icon} color={color} size={size} />
+                        ),  
+                    }
                 }
+
+                if(route?.tabBarBadge ?? false) {
+                    routeParams.options.tabBarBadge = route.tabBarBadge
+                    routeParams.options.tabBarBadgeStyle = {
+                        fontSize: route.tabBarBadge > 9 ? 8 : 10,
+                    }
                 }
-            )
+
+                return createElement( name, routeParams)
         })}
         </MainStack.Group>
         )
