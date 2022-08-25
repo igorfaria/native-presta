@@ -22,6 +22,7 @@ export class ProductPage extends Product {
     componentDidMount = () => this.dataFromParams()
     
     render(){
+        console.log(this.getData())
         const topFixedProps = {'navigation': this.props.navigation, 'route': this.props.route }
         return (
         <>  

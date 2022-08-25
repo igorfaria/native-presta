@@ -1,29 +1,33 @@
 import { Component } from 'react'
 import { StyleSheet, Image, TouchableOpacity } from 'react-native'
-import { VStack, HStack, Text, Button } from "@react-native-material/core"
+import { VStack, HStack, Text, Button } from '@react-native-material/core'
 import _l from '../../core/Language'
 import StyleMediaQuery from '../../component/StyleMediaQuery'
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import Icon from '@expo/vector-icons/MaterialCommunityIcons'
+import { Cart } from '../../model/Cart'
 
 export class ProductItem extends Component {
 
     constructor(props){
-      super(props);
+      super(props)
     }
 
-    handleButtonPress({navigation, id}){
-      alert('Add to cart ' + id.id);
+    handleButtonPress(props){
+      const {navigation, data} = props
+      const cart = new Cart(data)
+      console.log('Cart', cart)
     }
 
     handleCardPress(props){
       const {navigation, data} = props
-      navigation.navigate('product', data);
+      console.log('navigate', data)
+      return navigation.navigate('product', data);
     }
 
     render(){
       return (
         <VStack style={ styles.card } spacing={ 4 }>
-          <TouchableOpacity onPress={ this.props.onCardPress ? this.props.onCardPress : () => { this.handleCardPress(this.props) } }>
+          <TouchableOpacity onPress={ this.props?.onCardPress ?? (() => { this.handleCardPress(this.props) }) } >
                 
                 <Text variant="h1" style={ styles.title }>{ this.props.name }</Text>
                 
@@ -38,8 +42,8 @@ export class ProductItem extends Component {
                       style={ styles.button }
                       mode="contained"
                       disableElevation
-                      onPress={ this.props.onButtonPress ? this.props.onButtonPress : () => { this.handleButtonPress(this.props) } }
-                      title={ this.props.buttonLabel ? this.props.buttonLabel : _l('View more') }
+                      onPress={ this.props?.onButtonPress ?? (() => { this.handleButtonPress(this.props) } ) }
+                      title={ this.props?.buttonLabel ?? _l('View more') }
                     />  
 
                   <Button
@@ -47,7 +51,7 @@ export class ProductItem extends Component {
                       mode="contained"
                       disableElevation
                       compact
-                      onPress={ this.props.onButtonPress ? this.props.onButtonPress : () => { this.handleButtonPress(this.props) } }
+                      onPress={ this.props?.onButtonPress ?? (() => { this.handleButtonPress(this.props) }) }
                       title={<Icon name="cart-plus" style={ styles.buttonMobile } />}
                     />  
 

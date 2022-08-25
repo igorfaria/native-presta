@@ -23,7 +23,7 @@ export class Product extends Model {
         const params = this.props?.route?.params ?? {}
         const state = this.state?.data ?? {}
         const props = this.props?.data ?? {}
-        return { ...props,...params, ...state}
+        return { ...props, ...state, ...params}
     }
 
     getName(){
@@ -79,6 +79,7 @@ export class Product extends Model {
     }
 
     render(){
+        console.log(this.getData())
         return (<ProductItem
                     {...this.props}
                     id={this.getId()}
