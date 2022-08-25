@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import AppConfig from './app/core/AppConfig'
 import routes from './app/core/Routes'
 import { AppRegistry, View, StyleSheet, StatusBar  } from 'react-native'
@@ -9,7 +9,13 @@ import { NotConnected } from "./app/view/error/NotConnected"
 import { WebService } from "./app/core/WebService"
 import _l from "./app/core/Language"
 
+import { AppContext } from './app/core/AppContext'
+
+import { Cart } from './app/model/cart/Cart'
+
 export default function App(){
+
+  const AppCart = new Cart()
 
   useEffect(() => {
     StatusBar.setHidden(true)
@@ -33,9 +39,11 @@ export default function App(){
   }
 */
   return (
-    <View style={ styles.main }>
-      <BottomNav routes={ routes } userIsConnected={userIsConnected}/>
-    </View>
+    <AppContext.Provider value={'lorem'}>
+      <View style={ styles.main }>
+        <BottomNav routes={ routes } userIsConnected={userIsConnected}/>
+      </View>
+    </AppContext.Provider>
   );
 } 
 

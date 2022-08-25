@@ -4,9 +4,11 @@ import { VStack, HStack, Text, Button } from '@react-native-material/core'
 import _l from '../../core/Language'
 import StyleMediaQuery from '../../component/StyleMediaQuery'
 import Icon from '@expo/vector-icons/MaterialCommunityIcons'
-import { Cart } from '../../model/Cart'
+import { Cart  } from '../../model/cart/Cart'
 
 export class ProductItem extends Component {
+  
+    cart = new Cart()
 
     constructor(props){
       super(props)
@@ -14,19 +16,22 @@ export class ProductItem extends Component {
 
     handleButtonPress(props){
       const {navigation, data} = props
-      const cart = new Cart(data)
-      console.log('Cart', cart)
+      if(this.cart.addItem(data)){
+        alert('Product added to the cart')
+      } else {
+        alert('Failed to add the product to the cart')
+      }
     }
 
     handleCardPress(props){
       const {navigation, data} = props
-      console.log('navigate', data)
       return navigation.navigate('product', data);
     }
 
     render(){
       return (
         <VStack style={ styles.card } spacing={ 4 }>
+
           <TouchableOpacity onPress={ this.props?.onCardPress ?? (() => { this.handleCardPress(this.props) }) } >
                 
                 <Text variant="h1" style={ styles.title }>{ this.props.name }</Text>
@@ -54,7 +59,6 @@ export class ProductItem extends Component {
                       onPress={ this.props?.onButtonPress ?? (() => { this.handleButtonPress(this.props) }) }
                       title={<Icon name="cart-plus" style={ styles.buttonMobile } />}
                     />  
-
 
                 </HStack>
 

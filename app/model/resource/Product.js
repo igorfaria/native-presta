@@ -79,7 +79,6 @@ export class Product extends Model {
     }
 
     render(){
-        console.log(this.getData())
         return (<ProductItem
                     {...this.props}
                     id={this.getId()}
