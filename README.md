@@ -15,6 +15,10 @@
   </a>
 </p>
 
+## Development Status
+- Stopped :)
+- It only had the learning purpose and with what I learnt, I will start another project
+
 ## 🚀 How to use
 
 - Install packages with `npm install`.
