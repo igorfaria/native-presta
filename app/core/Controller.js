@@ -17,15 +17,12 @@ export class Controller extends Component {
         }
      }
 
-     /* List resource using a GET request */
-     show(){}
+    componentDidMount(){
+        const {navigation} = this.props
+        return (!navigation) ? null : navigation.addListener('focus', () => this.componentMounted() )
+    }
 
-     /* Create resource using a POST request */
-     create(){}
-
-     /* Update resource using a PUT request */  
-     update(){}
-
-     /* Delete resource using a DELETE request */
-     delete(){}
+    componentMounted(handlerFunction){
+        return null
+    }
 }
