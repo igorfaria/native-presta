@@ -11,11 +11,9 @@ export class CartController extends Controller {
             cart: new Cart(),
             items: {}
         }
-
-        
     }
 
-    componentDidMount(){
+    componentMounted(){
         this.state.cart.getItems().then(items => {
             if(items){
                 const products = {}
