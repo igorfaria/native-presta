@@ -10,8 +10,6 @@ export const Description = (props) => {
             <HTML content={props.content} />
         </>
     )
-
-
 }
 
 

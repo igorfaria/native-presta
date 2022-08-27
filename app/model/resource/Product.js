@@ -23,16 +23,19 @@ export class Product extends Model {
         const params = this.props?.route?.params ?? {}
         const state = this.state?.data ?? {}
         const props = this.props?.data ?? {}
-        return { ...props, ...state, ...params}
+        const merged = { ...props, ...state, ...params}
+        return merged
     }
 
     getName(){
         return this.getData()?.name[AppConfig.lang]?.value ?? 'No name'
     }
 
-    getPrice(){
+    getPrice(quantity,noFormat){
         const data = this.getData();
-        return ('price' in data) ? this.formatPrice(data.price) : ''
+        const price = data?.price ?? 0 
+        const finalPrice = (quantity ?? 1) * price
+        return finalPrice == 0 ? '' : (noFormat ? finalPrice : this.formatPrice(finalPrice))
     }
 
     getCover(){
@@ -47,8 +50,7 @@ export class Product extends Model {
     getDescription(){
         return this.getData()?.description[AppConfig.lang]?.value ?? '' 
     }
-
-
+    
     getImages(){
         const data = this.getData()
         const images = []

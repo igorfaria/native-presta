@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 export class ProductGrid extends Component {
     render(){
       return (
-        <View style={ 
+        <View style={
             {
                 flexWrap: 'wrap',
                 flexDirection: 'row',

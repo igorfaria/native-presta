@@ -1,4 +1,4 @@
-import { Component, useContext } from 'react'
+import { Component } from 'react'
 import { CartItem } from './CartItem'
 import { CacheRequest } from '../../core/CacheRequest'
 
@@ -17,13 +17,8 @@ export class Cart extends Component {
         }
 
         this.getItems().then(items => {
-            try {
-                items = JSON.parse(items)
-                if(!items) return false
-                this.state.items = [...items]
-            } catch(e) {
-                
-            }
+            if(!items) return false
+            this.state.items = [...items]
         })
 
         // just to debug it 
@@ -34,7 +29,6 @@ export class Cart extends Component {
     addItem(item){
         if(item?.id ?? false){ 
             return this.getItems().then(items => {
-                console.log('items', items)
                 if(!items) items = []
                 items.push(CartItem(item))
                 this.state.items = items
@@ -44,7 +38,20 @@ export class Cart extends Component {
         return false
     }
 
-    getItems(){
+    removeItem(id){
+        if(id){
+            return this.getItems().then(items => {
+                if(!items) items = []
+                items = items.filter((v,i) => v.id != id)
+                console.log('items', items)
+                this.state.items = items
+                this.save()
+            })
+        }
+    }
+
+    getItems(fromState){
+        if(fromState) return this.state.items
         const read = this.storage.read()
         return read.then(
             (items) => {
@@ -57,7 +64,6 @@ export class Cart extends Component {
                 }
             }
         ) 
-
     }
 
     save(){

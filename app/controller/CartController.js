@@ -9,10 +9,35 @@ export class CartController extends Controller {
         super(props)
         this.state = {
             cart: new Cart(),
+            items: {}
         }
+
+        
     }
-    
+
+    componentDidMount(){
+        this.state.cart.getItems().then(items => {
+            if(items){
+                const products = {}
+                items.forEach(item => {
+                    if(item.id in products) {
+                        products[item.id].quantity += 1
+                    } else {
+                        products[item.id] = {quantity: 1, item}
+                    }
+                })
+                this.setState({items: products})
+            }
+        })
+    }
+
+    getListItems(){
+        const list = []
+        Object.keys(this.state.items).forEach((v,i) => list.push({...this.state.items[v]}))
+        return list
+    }
+
     render(){
-        return <CartPage {...this.props} {...this.state} />  
+        return <CartPage {...this.props} items={this.getListItems()}/>  
     }
 }

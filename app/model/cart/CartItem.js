@@ -6,6 +6,6 @@ export const CartItem = (props) =>{
         ...props
     }
 
-    return {id: props.id, item: item}
+    return {...item}
 
 } 
