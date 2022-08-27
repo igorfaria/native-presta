@@ -1,8 +1,10 @@
 import { Component } from 'react'
-import { ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import _l from '../../core/Language'
 import { CartRow } from './_parts/CartRow'
+import { CartBottom } from './_parts/CartBottom'
 import { Product } from '../../model/resource/Product'
+import { Cart } from '../../model/cart/Cart'
 
 export class CartPage extends Component {
 
@@ -21,17 +23,34 @@ export class CartPage extends Component {
         }
     }
 
+    onDeleteHandler = (id) => {
+        const removed = (new Cart()).removeItem(id)
+        if(this.props?.update ?? false) this.props.update(id)
+        return removed
+    }
+
     render() {
+        let totalValue = 0
         if(this.state.items.length == 0) return <></>
         return (
-            <ScrollView>
+            <View style={ {flex: 1} }>
+            <ScrollView style={ {paddingBottom: 60} }>
                 { 
-                    this.state.items.map( (value ,index) => <CartRow 
+                    this.state.items.map( (value ,index) => {
+                    const {item, quantity} = value
+                    const product = new Product(item)
+                    totalValue += parseFloat(product.getPrice(quantity, true))
+                    return <CartRow 
+                        onDelete={this.onDeleteHandler}
                         key={index} 
-                        quantity={value.quantity} 
-                        product={new Product(value.item)} />
+                        quantity={quantity} 
+                        product={product} />
+                    }
              )  }
             </ScrollView>
+            
+            <CartBottom total={totalValue}/>    
+            </View>
         )
     }
 

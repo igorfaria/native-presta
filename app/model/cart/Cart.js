@@ -43,7 +43,7 @@ export class Cart extends Component {
             return this.getItems().then(items => {
                 if(!items) items = []
                 items = items.filter((v,i) => v.id != id)
-                console.log('items', items)
+                //console.log('items', items)
                 this.state.items = items
                 this.save()
             })
