@@ -3,15 +3,14 @@ import { HStack, VStack } from '@react-native-material/core'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons"
 import { StyleSheet, Image, Text } from 'react-native'
 import { Title } from '../../product/_parts/Title'
-import { Cart } from '../../../model/cart/Cart'
 
-export const CartRow = ({product, quantity}) => {
+export const CartRow = ({product, quantity, onDelete}) => {
 
     const [hidden, setHidden] = useState(false)
 
     const handlerDelete = (id) => {
         setHidden(true)
-        return (new Cart()).removeItem(id)
+        return (typeof onDelete === 'function') ? onDelete(id) : null
     }
 
     if(hidden) return null
