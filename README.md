@@ -21,7 +21,8 @@
 
 ## 🚀 How to use
 
-- Install packages with `npm install`.
+- Install packages with `expo install`
+- Run the project with `expo start`
 
 ## Publishing
 
