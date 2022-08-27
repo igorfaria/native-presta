@@ -1,7 +1,5 @@
-import AppConfig from './AppConfig'
 import { WebService } from './WebService'
-import Intl from 'intl'
-import pt from 'intl/locale-data/jsonp/pt-PT'
+import { FormatMoney } from '../component/FormatMoney'
 
 export class Model extends WebService {
 
@@ -26,10 +24,6 @@ export class Model extends WebService {
     }
 
     formatPrice(value) {
-        var formatter = new Intl.NumberFormat(pt, {
-            style: 'currency',
-            currency: AppConfig.price.currency
-        });
-        return formatter.format(parseFloat(value));
+        return FormatMoney(value)
     }
 }
